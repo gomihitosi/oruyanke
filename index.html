@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset='utf-8' />
+  <title>おるやんけタイピング</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #222;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #description {
+      margin-top: .5em;
+      font-size: .8em;
+      color: #999;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:link,
+    a:visited {
+      color: #d63030;
+    }
+
+    a:hover {
+      color: #ffffff;
+    }
+
+    a:active {
+      color: #999;
+    }
+
+    #stats {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@gomihitosi">
+  <meta property="og:url" content="https://gomihitosi.github.io/oruyanke/">
+  <meta property="og:title" content="おるやんけタイピング">
+  <meta property="og:description" content="おるやんけ　おるやんけ　どなたかおるやんけ">
+  <meta property="og:image" content="https://gomiokiba.com/game/oruyanke/card.png">
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <div id="description">Google Chrome 69 で動作確認済 <a href="https://twitter.com/gomihitosi" target="_blank" rel="noreferrer noopener">@gomihitosi</a></div>
+  <script src='./js/phina.min.js'></script>
+
+  <script src='./js/init.js'></script>
+  <script src='./js/title.js'></script>
+  <script src='./js/main.js'></script>
+  <script src='./js/result.js'></script>
+</body>
+
+</html>
