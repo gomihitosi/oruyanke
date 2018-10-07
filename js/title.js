@@ -20,7 +20,7 @@ phina.define('TitleScene', {
       .setPosition(this.gridX.center(), this.gridY.center(2));
 
     var versionLable = new Label({
-      text: 'ver 0.01',
+      text: 'ver 0.02',
       fontSize: 24,
       align: 'left',
     }).addChildTo(this)
