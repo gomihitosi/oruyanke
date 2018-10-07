@@ -36,6 +36,9 @@ phina.define('MainScene', {
     SE['oruyanke1'] = AssetManager.get('sound', 'oruyanke1');
     SE['oruyanke2'] = AssetManager.get('sound', 'oruyanke2');
     SE['donatakaoruyanke'] = AssetManager.get('sound', 'donatakaoruyanke');
+    for (var i = 1; i <= KEYCOUNT; i++) {
+      SE[`0${i}`] = AssetManager.get('sound', `0${i}`);
+    }
 
     this.isStart = false
     this.oruyanke = 0
@@ -52,6 +55,10 @@ phina.define('MainScene', {
       this.rubyLabelList[this.cursor].fill = '#D22'
       this.cursor++
       this.oruyanke++
+      if (IS_KEYBOARD) {
+        SE[`0${Math.floor(Math.random() * Math.floor(KEYCOUNT)) + 1}`].play()
+      }
+
       if (this.cursor >= this.target.ruby.length) {
         this.next()
       }
@@ -82,7 +89,9 @@ phina.define('MainScene', {
       })
   },
   next: function () {
-    SE[this.target.se].play()
+    if (IS_VOICE) {
+      SE[this.target.se].play()
+    }
 
     this.cursor = 0
 
@@ -105,9 +114,13 @@ phina.define('MainScene', {
         strokeWidth: 4,
         fontSize: FONT_CONFIG.main.size,
       }).addChildTo(this)
-        .setPosition(position + (i * FONT_CONFIG.main.margin), this.gridY.center(1) + TWEENER_MARGIN)
-      label.alpha = 0
-      label.tweener.wait(i * 10).by({ alpha: 1, y: -TWEENER_MARGIN }, 100)
+      if (IS_ANIME) {
+        label.alpha = 0
+        label.setPosition(position + (i * FONT_CONFIG.main.margin), this.gridY.center(1) + TWEENER_MARGIN)
+        label.tweener.wait(i * 10).by({ alpha: 1, y: -TWEENER_MARGIN }, 100)
+      } else {
+        label.setPosition(position + (i * FONT_CONFIG.main.margin), this.gridY.center(1))
+      }
       return label
     })
     this.rubyLabelList = this.target.ruby.map((v, i, arr) => {
@@ -120,9 +133,13 @@ phina.define('MainScene', {
         strokeWidth: 4,
         fontSize: FONT_CONFIG.sub.size,
       }).addChildTo(this)
-        .setPosition(position + (i * FONT_CONFIG.sub.margin), this.gridY.center(-1) + TWEENER_MARGIN)
-      label.alpha = 0
-      label.tweener.wait(i * 10).by({ alpha: 1, y: -TWEENER_MARGIN }, 100)
+      if (IS_ANIME) {
+        label.alpha = 0
+        label.setPosition(position + (i * FONT_CONFIG.sub.margin), this.gridY.center(-1) + TWEENER_MARGIN)
+        label.tweener.wait(i * 10).by({ alpha: 1, y: -TWEENER_MARGIN }, 100)
+      } else {
+        label.setPosition(position + (i * FONT_CONFIG.sub.margin), this.gridY.center(-1))
+      }
       return label
     })
   }

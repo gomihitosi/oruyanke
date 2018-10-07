@@ -21,6 +21,10 @@ var ASSETS = {
     'rm2p': 'assets/font/rm2p_oruyanke.woff2',
   },
 }
+const KEYCOUNT = 8
+for (var i = 1; i <= KEYCOUNT; i++) {
+  ASSETS.sound[`0${i}`] = `assets/sound/key/0${i}.${SUPPORT_EXT}`
+}
 
 var SCENES = [
   {

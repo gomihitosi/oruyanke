@@ -5,20 +5,19 @@ phina.define('ResultScene', {
     this.superInit(option);
 
     var param = option.oruyanke
-    var result
-    if (param > 350) {
-      result = '変態'
-    } else if (param > 250) {
-      result = 'サブカルクソ女'
-    } else if (param > 150) {
-      result = 'バーチャルYouTuber'
-    } else if (param > 100) {
-      result = '清楚'
-    } else if (param > 50) {
-      result = 'ムカデ人間'
-    } else {
-      result = 'クソ雑魚'
-    }
+    ACHIEVEMENT = [
+      { name: '神', min: 500, max: 9999 },
+      { name: '変態', min: 350, max: 499 },
+      { name: 'サブカルクソ女', min: 250, max: 349 },
+      { name: 'バーチャルYouTuber', min: 150, max: 249 },
+      { name: '清楚', min: 100, max: 149 },
+      { name: 'ムカデ人間', min: 50, max: 99 },
+      { name: 'クソ雑魚', min: 0, max: 49 },
+    ]
+    var result = ACHIEVEMENT.filter((v) => param >= v.min && param <= v.max).map((v) => {
+      // maxの値を三分割して[-/ /+]の評価を付与
+      return v.name + ((v.max / param - 1) < 0.33 ? '+' : (v.max / param - 1) > 0.66 ? '-' : '')
+    })
 
     this.infoLabel = new Label({
       text: '貴方のおるやんけ度は…',
@@ -27,7 +26,7 @@ phina.define('ResultScene', {
     }).addChildTo(this)
       .setPosition(this.gridX.center(), this.gridY.center(-2));
     this.resultLabel = new Label({
-      text: result + '級',
+      text: result,
       fontSize: 72,
       align: 'center',
     }).addChildTo(this)
@@ -53,7 +52,7 @@ phina.define('ResultScene', {
       .setInteractive(true)
 
     this.twitter.onclick = function () {
-      var text = `貴方のおるやんけ度は「${result}級」でした。`
+      var text = `貴方のおるやんけ度は「${result}」でした。`
       var url = Twitter.createURL({
         text: text,
         hashtags: 'おるやんけタイピング',
